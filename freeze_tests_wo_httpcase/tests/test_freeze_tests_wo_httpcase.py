@@ -28,5 +28,7 @@ class TestFreezeWoHttpCase(odoo.tests.TransactionCase):
 
     @unittest.skip("Disable it if you want to see a testing freeze")
     def test_02_open_non_static_url(self):
-        "Testing that a non-static url is not available before to start odoo entirely without HttpCase"
+        """Testing that a non-static url is not available before to start odoo entirely without HttpCase
+        A few reports are using a non-static url from wkhtmltopdf
+        """"
         urlopen('http://localhost:8069/web/login')
