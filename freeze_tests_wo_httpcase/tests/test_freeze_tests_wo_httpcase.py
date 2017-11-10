@@ -12,13 +12,21 @@ except ImportError:
 @odoo.tests.at_install(False)
 @odoo.tests.post_install(True)
 class TestNoFreezeWHttpCase(odoo.tests.HttpCase):
-    def test_open_url(self):
+    def test_01_open_static_url(self):
+        "Testing that opening a static url with HttpCase is good!"
+        urlopen('http://localhost:8069/web/static/src/css/reset.min.css')
+
+    def test_02_open_non_static_url(self):
         "Testing that opening a non-static url with HttpCase is good!"
         urlopen('http://localhost:8069/web/login')
 
 
 class TestFreezeWoHttpCase(odoo.tests.TransactionCase):
+    def test_01_open_static_url(self):
+        "Testing that a static url is available before to start odoo entirely without HttpCase"
+        urlopen('http://localhost:8069/web/static/src/css/reset.min.css')
+
     @unittest.skip("Disable it if you want to see a testing freeze")
-    def test_open_url(self):
-        "Testing that before start odoo entirely is not available to use non-static url without HttpCase"
+    def test_02_open_non_static_url(self):
+        "Testing that a non-static url is not available before to start odoo entirely without HttpCase"
         urlopen('http://localhost:8069/web/login')
